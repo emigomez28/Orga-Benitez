@@ -1,0 +1,31 @@
+     1                                  global main
+     2                                  extern puts
+     3                                  
+     4                                  section .data
+     5 00000000 28                          fff db "("
+     6 00000001 0E                          des db 14
+     7 00000002 5A39                        val2 db "Z9"
+     8 00000004 00                          val3 db 0
+     9                                  
+    10                                  section .bss
+    11 00000000 <res 1F4h>                  mat resb 500
+    12                                  
+    13                                  section .text
+    14                                  main:
+    15 00000000 488D1C25[00000000]          lea rbx, [mat]
+    16 00000008 8A0C25[00000000]            mov cl, [fff]
+    17                                  ;ssi:
+    18                                  ;    add ax, [rbx + rdi]
+    19                                  ;    add dil, [des]
+    20                                  ;    loop ssi
+    21                                  
+    22                                  otra_rutina: 
+    23 0000000F 4831C0                      xor rax, rax
+    24 00000012 88C4                        mov ah, al
+    25 00000014 80C401                      add ah, 1
+    26 00000017 66890425[01000000]          mov [des], ax
+    27 0000001F 48BF-                       mov rdi, des
+    27 00000021 [0100000000000000] 
+    28 00000029 4883EC08                    sub rsp, 8
+    29 0000002D E8(00000000)                call puts
+    30 00000032 4883C408                    add rsp, 8

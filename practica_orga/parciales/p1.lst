@@ -1,0 +1,46 @@
+     1                                  global main
+     2                                  extern printf
+     3                                  extern puts
+     4                                  
+     5                                  section .data
+     6 00000000 464B44454A47                tabla db "FKD","EJG"
+     7 00000006 4849514C4D4E                t1 db "HIQ","LMN"
+     8 0000000C 4F4352414250                t2 db "OCR","ABP"
+     9 00000012 00                          desplaz db 0
+    10 00000013 00<rep 3h>                  val1 times 3 db 0
+    11                                  
+    12                                  
+    13                                  section .text
+    14                                  main:
+    15 00000000 BB02000000                  mov rbx, 2
+    16 00000005 B902000000                  mov rcx, 2
+    17                                  
+    18 0000000A 48FFCB                      dec rbx
+    19 0000000D 486BDB06                    imul rbx, 6
+    20                                  
+    21 00000011 4883E901                    sub rcx, 1
+    22 00000015 486BC902                    imul rcx, 2
+    23                                  
+    24 00000019 4801CB                      add rbx, rcx
+    25 0000001C 488D0425[00000000]          lea rax, [tabla]
+    26 00000024 4801D8                      add rax, rbx
+    27                                  
+    28 00000027 4883EB06                    sub rbx, 6
+    29 0000002B 4889D9                      mov rcx, rbx
+    30                                  
+    31 0000002E 4889C6                      mov rsi, rax
+    32 00000031 48BF-                       mov rdi, val1
+    32 00000033 [1300000000000000] 
+    33                                  
+    34 0000003B F3A4                        rep movsb
+    35                                  
+    36 0000003D 48BF-                       mov rdi, val1
+    36 0000003F [1300000000000000] 
+    37 00000047 4883EC08                    sub rsp,8
+    38 0000004B E8(00000000)                call puts
+    39 00000050 4883C408                    add rsp, 8
+    40                                  
+    41 00000054 4829C0                      sub rax, rax
+    42 00000057 668B0425[07000000]          mov ax, [t1 + 1]
+    43                                  
+    44                                      
